@@ -41,6 +41,7 @@ tasks:
   stop: 
     cmds:
       - pkill -SIGTERM -f {{.FRONT_END_NAME}}
+    ignore_error: true
       
   default:
     cmds:
