@@ -1,0 +1,48 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+  FRONT_END_NAME: front-end
+  BROKER_NAME: broker-service
+
+tasks:
+
+  up: 
+    cmds:
+      - docker-compose up -d
+
+  down: 
+    cmds:
+      - docker-compose down
+
+  up_build:
+    cmds:
+      - task: down
+      - docker-compose up --build -d 
+
+  build_broker:
+    dir: "./broker-service"
+    cmds:
+      - go build -o {{.BROKER_NAME}} ./cmd/api
+
+  build_front:
+    dir: "./front-end"
+    cmds:
+      - go build -o {{.FRONT_END_NAME}} ./cmd/web
+
+  start:
+    dir: "./front-end"
+    cmds:
+      - task: build_front
+      - ./{{.FRONT_END_NAME}} &
+
+  stop: 
+    cmds:
+      - pkill -SIGTERM -f {{.FRONT_END_NAME}}
+      
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
