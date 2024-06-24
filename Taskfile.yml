@@ -6,7 +6,7 @@ vars:
   GREETING: Hello, World!
   FRONT_END_NAME: front-end
   BROKER_NAME: broker-service
-
+  AUTH_NAME: auth-service
 tasks:
 
   up: 
@@ -20,12 +20,26 @@ tasks:
   up_build:
     cmds:
       - task: down
+      # - task: build
       - docker-compose up --build -d 
+
+  build:
+    env:
+      GOOS: linux 
+    cmds:
+      - task: build_broker
+      - task: build_auth
+      - task: build_front
 
   build_broker:
     dir: "./broker-service"
     cmds:
       - go build -o {{.BROKER_NAME}} ./cmd/api
+  
+  build_auth:
+    dir: "./auth-service"
+    cmds:
+      - go build -o {{.AUTH_NAME}} ./cmd/api
 
   build_front:
     dir: "./front-end"

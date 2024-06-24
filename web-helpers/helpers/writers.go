@@ -1,4 +1,4 @@
-package main
+package helpers
 
 import (
 	"encoding/json"
@@ -15,7 +15,7 @@ type JSONResponse struct {
 }
 
 // readJSON tries to read the body of a request and converts it into JSON
-func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data interface{}) error {
+func ReadJSON(w http.ResponseWriter, r *http.Request, data interface{}) error {
 	maxBytes := 1048576 // one megabyte
 	r.Body = http.MaxBytesReader(w, r.Body, int64(maxBytes))
 
@@ -34,7 +34,7 @@ func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data interfa
 }
 
 // writeJSON takes a response status code and aribitrary data and writes a json response to the client
-func (app *Config) writeJSON(w http.ResponseWriter, status int, data any, headers ...http.Header) error {
+func WriteJSON(w http.ResponseWriter, status int, data any, headers ...http.Header) error {
 	out, err := json.MarshalIndent(data, "", "\t")
 	if err != nil {
 		return err
@@ -58,7 +58,7 @@ func (app *Config) writeJSON(w http.ResponseWriter, status int, data any, header
 
 // errorJSON takes an error, and optionally a response status code, and generates and sends
 // a json error response
-func (app *Config) errorJSON(w http.ResponseWriter, err error, status ...int) {
+func ErrorJSON(w http.ResponseWriter, err error, status ...int) {
 	statusCode := http.StatusBadRequest
 
 	if len(status) > 0 {
@@ -85,5 +85,5 @@ func (app *Config) errorJSON(w http.ResponseWriter, err error, status ...int) {
 	payload.Error = true
 	payload.Message = customErr.Error()
 
-	app.writeJSON(w, statusCode, payload)
+	WriteJSON(w, statusCode, payload)
 }

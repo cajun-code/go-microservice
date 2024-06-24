@@ -21,3 +21,5 @@
 # go.work
 front-end/front-end
 .DS_Store
+broker-service/broker-service
+auth-service/auth-service

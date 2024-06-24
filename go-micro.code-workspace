@@ -1,12 +1,23 @@
 {
 	"folders": [
 		{
+			"name": "front-end",
 			"path": "front-end"
 		},
 		{
+			"name": "broker-service",
 			"path": "broker-service"
 		},
 		{
+			"name": "auth-service",
+			"path": "auth-service"
+		},
+		{
+			"name": "web-helpers",
+			"path": "web-helpers"
+		},
+		{
+			"name": "go-micro",
 			"path": "."
 		}
 	]

@@ -2,12 +2,13 @@ package main
 
 import (
 	"net/http"
+	"web-helpers/helpers"
 )
 
 func (app *Config) Broker(w http.ResponseWriter, r *http.Request) {
-	payload := JSONResponse{
+	payload := helpers.JSONResponse{
 		Error:   false,
 		Message: "Hit the broker",
 	}
-	app.writeJSON(w, http.StatusOK, payload)
+	helpers.WriteJSON(w, http.StatusOK, payload)
 }
