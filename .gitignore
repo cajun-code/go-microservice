@@ -19,6 +19,7 @@
 
 # Go workspace file
 # go.work
+data/postgres
 front-end/front-end
 .DS_Store
 broker-service/broker-service
