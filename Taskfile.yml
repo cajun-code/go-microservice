@@ -7,6 +7,7 @@ vars:
   FRONT_END_NAME: front-end
   BROKER_NAME: broker-service
   AUTH_NAME: auth-service
+  LOGGER_NAME: logger-service
 tasks:
 
   up: 
@@ -30,6 +31,7 @@ tasks:
       - task: build_broker
       - task: build_auth
       - task: build_front
+      - task: build_logger
 
   build_broker:
     dir: "./broker-service"
@@ -40,6 +42,11 @@ tasks:
     dir: "./auth-service"
     cmds:
       - go build -o {{.AUTH_NAME}} ./cmd/api
+
+  build_logger:
+    dir: "./logger-service"
+    cmds:
+      - go build -o {{.LOGGER_NAME}} ./cmd/api
 
   build_front:
     dir: "./front-end"

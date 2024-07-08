@@ -1,6 +1,10 @@
 {
 	"folders": [
 		{
+			"name": "go-micro",
+			"path": "."
+		},
+		{
 			"name": "front-end",
 			"path": "front-end"
 		},
@@ -17,8 +21,8 @@
 			"path": "web-helpers"
 		},
 		{
-			"name": "go-micro",
-			"path": "."
+			"name": "logger-service",
+			"path": "logger-service"
 		}
 	]
 }
